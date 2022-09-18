@@ -15,6 +15,9 @@ window.onload = () => {
         {
             redZones[i].style.backgroundColor = "red";
         }
+        //Need to also display you lost message
+        document.getElementById("status").innerText = "You Lost !"
+
     };
 
     //Give all the boundaries the function under the event of mouseover
