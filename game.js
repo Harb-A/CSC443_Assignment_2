@@ -17,6 +17,7 @@ window.onload = () => {
         if (gameState == true && siteState == false)
         {
             siteState = true;
+            document.getElementById("status").innerText = "Begin by moving your mouse over the \"S\"";
             console.log(siteState + " " + gameState);
         }
     }
@@ -71,12 +72,31 @@ window.onload = () => {
     const endBtn = document.getElementById("end");
     getPoints = () => {
         if (siteState == true && gameState == true){
-            console.log("win");
+            document.getElementById("status").innerText = "You Won !"
             siteState = false;
         }
         }
     endBtn.addEventListener("mouseover", getPoints);
-    
+
+
+/*Cheat catch section*/
+    //Why on earth would you wanna cheat, im not paying you for getting a highscore and the game is offline anyways
+
+    //Entire maze is in the "game" div, if you leave the game div you're probably cheating dude//
+    const anitCheatSupreme = document.getElementById("game");
+    cheatDetected = () => {
+        if (siteState == true && gameState == true)
+        {
+            siteState = false;
+            gameState = false;
+            for (var i = 0 ; i < redZones.length ; i++)
+            {
+                redZones[i].style.backgroundColor = "red";
+            }
+            document.getElementById("status").innerText = "You seriously cheating bruh?"
+        }
+    }
+    anitCheatSupreme.addEventListener("mouseleave", cheatDetected);
 }
 
 
