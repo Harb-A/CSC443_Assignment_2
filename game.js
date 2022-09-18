@@ -10,6 +10,7 @@ window.onload = () => {
     //On launch, website is idle so you dont get red markers while navigating, game status is on meaning you can play only if you hover "S"
     let siteState = false;
     let gameState = true;
+    let counter = 0;
 
     //Grab the "S", if the site is idle and the game is playable make the site active
     const startBtn = document.getElementById("start");
@@ -17,8 +18,7 @@ window.onload = () => {
         if (gameState == true && siteState == false)
         {
             siteState = true;
-            document.getElementById("status").innerText = "Begin by moving your mouse over the \"S\"";
-            console.log(siteState + " " + gameState);
+            document.getElementById("status").innerText = "Begin by moving your mouse over the \"S\" Points: " + counter;
         }
     }
     startBtn.addEventListener("mouseover", wePlay);
@@ -31,16 +31,17 @@ window.onload = () => {
     const redZones = redParentDOM.getElementsByClassName('boundary');
 
     //When both the site and game are active, if you touch a nono zone it disables both and flags your screen with the message and red colors
+    //It also decrements your counter
     setRed = () => {
         if (siteState == true && gameState == true){
             siteState = false;
             gameState = false;
-            console.log(siteState + " " + gameState);
+            counter -= 10;
             for (var i = 0 ; i < redZones.length ; i++)
             {
                 redZones[i].style.backgroundColor = "red";
             }
-            document.getElementById("status").innerText = "You Lost !"
+            document.getElementById("status").innerText = "You lost 10 points!";
         }
     };
     for (var i = 0 ; i < redZones.length ; i++)
@@ -55,12 +56,11 @@ window.onload = () => {
         if (gameState == false){
             siteState = true;
             gameState = true;
-            console.log(siteState + " " + gameState);
             for (var i = 0 ; i < redZones.length ; i++)
             {
                 redZones[i].style.backgroundColor = "white";
             }
-            document.getElementById("status").innerText = "Begin by moving your mouse over the \"S\"";
+            document.getElementById("status").innerText = "Begin by moving your mouse over the \"S\". Points: " + counter;
         }
     }
     startBtn.addEventListener("click", cleanUp);
@@ -69,20 +69,22 @@ window.onload = () => {
 /*Win section*/
     //Grab "E", if the site and game are both on, means you didnt trigger a loss scenario so get your points, 
     //also reset the state so you dont get free points :P
+    //also gives you 5 points
     const endBtn = document.getElementById("end");
     getPoints = () => {
         if (siteState == true && gameState == true){
-            document.getElementById("status").innerText = "You Won !"
+            counter += 5;
+            document.getElementById("status").innerText = "You won 5 points!";
             siteState = false;
         }
-        }
+    }
     endBtn.addEventListener("mouseover", getPoints);
 
 
 /*Cheat catch section*/
     //Why on earth would you wanna cheat, im not paying you for getting a highscore and the game is offline anyways
 
-    //Entire maze is in the "game" div, if you leave the game div you're probably cheating dude//
+    //Entire maze is in the "game" div, if you leave the game div you're probably cheating dude
     const anitCheatSupreme = document.getElementById("game");
     cheatDetected = () => {
         if (siteState == true && gameState == true)
@@ -93,10 +95,13 @@ window.onload = () => {
             {
                 redZones[i].style.backgroundColor = "red";
             }
-            document.getElementById("status").innerText = "You seriously cheating bruh?"
+            document.getElementById("status").innerText = "You seriously cheating bruh? -10 points!";
         }
     }
     anitCheatSupreme.addEventListener("mouseleave", cheatDetected);
+
+
+    
 }
 
 
