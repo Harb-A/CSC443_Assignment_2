@@ -17,7 +17,7 @@ window.onload = () => {
         if (gameState == true && siteState == false)
         {
             siteState = true;
-            console.log(siteState);
+            console.log(siteState + " " + gameState);
         }
     }
     startBtn.addEventListener("mouseover", wePlay);
@@ -34,7 +34,7 @@ window.onload = () => {
         if (siteState == true && gameState == true){
             siteState = false;
             gameState = false;
-            console.log(gameState);
+            console.log(siteState + " " + gameState);
             for (var i = 0 ; i < redZones.length ; i++)
             {
                 redZones[i].style.backgroundColor = "red";
@@ -54,6 +54,7 @@ window.onload = () => {
         if (gameState == false){
             siteState = true;
             gameState = true;
+            console.log(siteState + " " + gameState);
             for (var i = 0 ; i < redZones.length ; i++)
             {
                 redZones[i].style.backgroundColor = "white";
@@ -62,6 +63,20 @@ window.onload = () => {
         }
     }
     startBtn.addEventListener("click", cleanUp);
+
+
+/*Win section*/
+    //Grab "E", if the site and game are both on, means you didnt trigger a loss scenario so get your points, 
+    //also reset the state so you dont get free points :P
+    const endBtn = document.getElementById("end");
+    getPoints = () => {
+        if (siteState == true && gameState == true){
+            console.log("win");
+            siteState = false;
+        }
+        }
+    endBtn.addEventListener("mouseover", getPoints);
+    
 }
 
 
