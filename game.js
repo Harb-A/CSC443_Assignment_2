@@ -18,7 +18,8 @@ window.onload = () => {
         if (gameState == true && siteState == false)
         {
             siteState = true;
-            document.getElementById("status").innerText = "Begin by moving your mouse over the \"S\" Points: " + counter;
+            document.getElementById("status").innerText = "Begin by moving your mouse over the \"S\"";
+            document.getElementsByClassName("boundary")[5].innerHTML = "Points: " + counter;
         }
     }
     startBtn.addEventListener("mouseover", wePlay);
@@ -41,7 +42,8 @@ window.onload = () => {
             {
                 redZones[i].style.backgroundColor = "red";
             }
-            document.getElementById("status").innerText = "You lost 10 points!";
+            document.getElementById("status").innerText = "You lost !";
+            document.getElementsByClassName("boundary")[5].innerHTML = "Points: " + counter;
         }
     };
     for (var i = 0 ; i < redZones.length ; i++)
@@ -60,7 +62,8 @@ window.onload = () => {
             {
                 redZones[i].style.backgroundColor = "white";
             }
-            document.getElementById("status").innerText = "Begin by moving your mouse over the \"S\". Points: " + counter;
+            document.getElementById("status").innerText = "Begin by moving your mouse over the \"S\".";
+            document.getElementsByClassName("boundary")[5].innerHTML = "Points: " + counter;
         }
     }
     startBtn.addEventListener("click", cleanUp);
@@ -74,7 +77,8 @@ window.onload = () => {
     getPoints = () => {
         if (siteState == true && gameState == true){
             counter += 5;
-            document.getElementById("status").innerText = "You won 5 points!";
+            document.getElementById("status").innerText = "You won!";
+            document.getElementsByClassName("boundary")[5].innerHTML = "Points: " + counter;
             siteState = false;
         }
     }
@@ -95,13 +99,14 @@ window.onload = () => {
             {
                 redZones[i].style.backgroundColor = "red";
             }
-            document.getElementById("status").innerText = "You seriously cheating bruh? -10 points!";
+            document.getElementById("status").innerText = "You seriously cheating bruh?";
+            document.getElementsByClassName("boundary")[5].innerHTML = "Points: " + counter;
         }
     }
     anitCheatSupreme.addEventListener("mouseleave", cheatDetected);
-
-
+    document.getElementsByClassName("boundary")[5].innerHTML = "Points: " + counter;
     
+
 }
 
 
